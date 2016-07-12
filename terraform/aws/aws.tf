@@ -26,6 +26,7 @@ variable "worker_volume_size" {default = "20"} # size is in gigabytes
 
 module "iam-profiles" {
   source = "./iam"
+  short_name = "${var.short_name}"
 }
 
 resource "aws_vpc" "main" {

@@ -75,6 +75,7 @@ module "security-groups" {
 
 module "iam-profiles" {
   source = "./terraform/aws/iam"
+  short_name = "${var.short_name}"
 }
 
 module "control-nodes" {

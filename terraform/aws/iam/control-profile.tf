@@ -1,10 +1,12 @@
+variable "short_name" {default = "mantl"}
+
 resource "aws_iam_instance_profile" "control_profile" {
-  name = "control_profile"
+  name = "${var.short_name}-control-profile"
   roles = ["${aws_iam_role.control_role.name}"]
 }
 
 resource "aws_iam_role_policy" "control_policy" {
-  name = "control_policy"
+  name = "${var.short_name}-control-policy"
   role = "${aws_iam_role.control_role.id}"
   policy = <<EOF
 {
@@ -31,7 +33,7 @@ EOF
 }
 
 resource "aws_iam_role" "control_role" {
-  name = "control_role"
+  name = "${var.short_name}-control-role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
