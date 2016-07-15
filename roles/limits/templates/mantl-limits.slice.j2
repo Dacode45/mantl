@@ -1,0 +1,25 @@
+[Unit]
+Description=Limited Mantl Resources Slice
+DefaultDependencies=no
+Before=slices.target
+
+[Slice]
+CPUShares={{ CPUShares }}
+MemoryLimit={{ MemoryLimit }}
+
+.include /usr/lib/systemd/system/nginx-consul.service
+.include /usr/lib/systemd/system/calico.service
+.include /usr/lib/systemd/system/docker.service
+.include /usr/lib/systemd/system/zookeeper.service
+.include /usr/lib/systemd/system/etcd.service
+.include /usr/lib/systemd/system/skydns.service
+.include /usr/lib/systemd/system/glusterd.service
+.include /usr/lib/systemd/system/haproxy.service
+.include /usr/lib/systemd/system/kublet.service
+.include /usr/lib/systemd/system/logstash.service
+.include /usr/lib/systemd/system/nginx-mantlui.service
+.include /usr/lib/systemd/system/mesos-master.service
+.include /usr/lib/systemd/system/marathon.service
+.include /usr/lib/systemd/system/traefik.service.service
+.include /usr/lib/systemd/system/traefik.service
+.include /usr/lib/systemd/system/vault.service

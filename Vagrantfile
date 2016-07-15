@@ -110,11 +110,16 @@ Vagrant.configure(2) do |config|
 
       if last # Only run Ansible after all hosts are up
         # Sync Mantl source code, get required provisioning packages
-        control.vm.synced_folder ".", "/vagrant", type: "rsync",
-          rsync__exclude: [
-            ".terraform/", ".git/", ".vagrant/", "docs/", "builds/",
-            "packer_cache/"
-        ]
+        if Vagrant::Util::Platform.windows?
+          control.vm.synced_folder ".", "/vagrant", nfs: true
+        else
+          control.vm.synced_folder ".", "/vagrant", type: "rsync",
+            rsync__exclude: [
+              ".terraform/", ".git/", ".vagrant/", "docs/", "builds/",
+              "packer_cache/"
+          ]
+        end
+
         control.vm.provision "shell" do |s|
           s.path = "vagrant/provision.sh"
           s.args = [hosts]
